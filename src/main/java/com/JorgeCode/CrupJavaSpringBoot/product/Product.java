@@ -1,15 +1,15 @@
 package com.JorgeCode.CrupJavaSpringBoot.product;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 @Entity
 @Table
 public class Product {
 
-
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int documento;
     private String names;
