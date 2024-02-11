@@ -4,6 +4,8 @@ package com.JorgeCode.CrupJavaSpringBoot.product;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
+
 @Entity
 @Table
 public class Product {
@@ -11,37 +13,39 @@ public class Product {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private int documento;
-    private String names;
-    private String last_names;
+    private String nombres;
+    private String apellidos;
     private String email;
     private int telefono;
     private LocalDate fecha;
+    @Transient
     private int antiguedad;
 
     public Product() {
     }
 
-    public Product(Long id, int documento, String names, String last_names, String email, int telefono, LocalDate fecha,
-                   int antiguedad) {
+    public Product(Long id, int documento, String nombres, String apellidos, String email, int telefono, LocalDate fecha)
+                    {
         this.id = id;
         this.documento = documento;
-        this.names = names;
-        this.last_names = last_names;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.email = email;
         this.telefono = telefono;
         this.fecha = fecha;
-        this.antiguedad = antiguedad;
+
     }
 
-    public Product(int documento, String names, String last_names, String email, int telefono, LocalDate fecha, int antiguedad) {
+    public Product(int documento, String nombres, String apellidos, String email, int telefono, LocalDate fecha) {
         this.documento = documento;
-        this.names = names;
-        this.last_names = last_names;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.email = email;
         this.telefono = telefono;
         this.fecha = fecha;
-        this.antiguedad = antiguedad;
+
     }
 
     public Long getId() {
@@ -60,20 +64,20 @@ public class Product {
         this.documento = documento;
     }
 
-    public String getNames() {
-        return names;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getLast_names() {
-        return last_names;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setLast_names(String last_names) {
-        this.last_names = last_names;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getEmail() {
@@ -101,7 +105,7 @@ public class Product {
     }
 
     public int getAntiguedad() {
-        return antiguedad;
+        return Period.between(this.fecha,LocalDate.now()).getYears();
     }
 
     public void setAntiguedad(int antiguedad) {
